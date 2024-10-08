@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _231434_231171.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace _231434_231171
         public frmMenu()
         {
             InitializeComponent();
+        }
+
+        private void cidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCidades form = new FrmCidades();
+            form.Show();
         }
     }
 }

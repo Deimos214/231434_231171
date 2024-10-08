@@ -9,29 +9,29 @@ using System.Windows.Forms;
 
 namespace _231434_231171
 {
-    internal class Cidades
+    public class Cidades
     {
-        public int id {  get; set; }
+        public int id { get; set; }
         public string nome { get; set; }
         public string uf { get; set; }
 
-    }
-    public void Incluir()
-    {
-        try
+
+        public void Incluir()
         {
-            Banco.AbrirConexao();
-            Banco.Comando = new MySqlCommand("INSERT INTO cidades (nome, uf) VALUES (@nome, @uf)", Banco.Conexao);
-            Banco.Comando.Parameters.AddWithValue("@nome", nome);
-            Banco.Comando.Parameters.AddWithValue("@uf", uf);
-            Banco.Comando.ExecuteNonQuery();
-            Banco.FecharConexao();
+            try
+            {
+                Banco.AbrirConexao();
+                Banco.Comando = new MySqlCommand("INSERT INTO cidades (nome, uf) VALUES (@nome, @uf)", Banco.Conexao);
+                Banco.Comando.Parameters.AddWithValue("@nome", nome);
+                Banco.Comando.Parameters.AddWithValue("@uf", uf);
+                Banco.Comando.ExecuteNonQuery();
+                Banco.FecharConexao();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        catch (Exception e)
-        {
-            MessageBox.Show(e.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
         public void Alternar()
         {
             try
@@ -64,7 +64,7 @@ namespace _231434_231171
                 MessageBox.Show(e.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Consultar()
+        public DataTable Consultar()
         {
             try
             {
@@ -83,4 +83,6 @@ namespace _231434_231171
                 return null;
             }
         }
+    }
+}
     
